@@ -16,7 +16,7 @@ public class SalarioNeto {
             // ProcessBuilder permite crear y ejecutar procesos del sistema operativo desde Java.
             // Aquí se construye el comando: elixir LongitudPalabra.exs <palabra>
             // Esto ejecuta el script de Elixir y le pasa la palabra como argumento.
-            ProcessBuilder pb = new ProcessBuilder("C:\\\\Program Files\\\\Elixir\\\\bin\\\\elixir.bat", "SalarioNeto.exs", horas, valor_hora);
+            ProcessBuilder pb = new ProcessBuilder("C:\\\\Program Files\\\\Elixir\\\\bin\\\\elixir.bat", "SalarioNeto.exs", horas.trim(), valor_hora.trim());
 
             // Redirige el flujo de error al flujo de salida estándar, así puedes leer ambos por el mismo canal
             pb.redirectErrorStream(true);
@@ -28,9 +28,9 @@ public class SalarioNeto {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             // Lee la primera línea de la salida (que será la cantidad de letras)
-            String SalarioNeto = reader.readLine().toString();
+            String salarioNeto = reader.readLine();
 
-            JOptionPane.showMessageDialog(null, "El Salario Neto de " + nombre + " es: " + SalarioNeto);
+            JOptionPane.showMessageDialog(null, "El Salario Neto de " + nombre + " es: " + salarioNeto);
 
         } catch (Exception e) {
             e.printStackTrace();
