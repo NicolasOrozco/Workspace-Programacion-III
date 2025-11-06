@@ -6,9 +6,9 @@ defmodule Carrera do
       {"Búho", 400}
     ]
 
-    IO.puts("🏁 ¡Comienza la carrera!\n")
+    IO.puts("¡Comienza la carrera!\n")
 
-    # Lanzamos un proceso por cada animal (sin vincularlos)
+    # Lanzamos un proceso por cada animal
     Enum.each(animales, fn {nombre, velocidad} ->
       spawn(fn -> correr(nombre, velocidad, self()) end)
     end)
@@ -17,10 +17,10 @@ defmodule Carrera do
     resultados = recibir_resultados(length(animales), [])
 
     if resultados == [] do
-      IO.puts("\n⚠️ Ningún animal terminó la carrera.")
+      IO.puts("\nNingún animal terminó la carrera.")
     else
       ganador = Enum.min_by(resultados, fn {_, tiempo} -> tiempo end)
-      IO.puts("\n🏆 El ganador es #{elem(ganador, 0)} con un tiempo de #{elem(ganador, 1)} ms!")
+      IO.puts("\nEl ganador es #{elem(ganador, 0)} con un tiempo de #{elem(ganador, 1)} ms!")
     end
   end
 
@@ -44,7 +44,7 @@ defmodule Carrera do
         recibir_resultados(restantes - 1, [{nombre, tiempo} | resultados])
     after
       5000 ->
-        IO.puts("⏰ Se agotó el tiempo de espera, algún animal no llegó.")
+        IO.puts("Se agotó el tiempo de espera, algún animal no llegó.")
         resultados
     end
   end
